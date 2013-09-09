@@ -1,0 +1,34 @@
+committeeSchema = new Schema({
+	comCode: {
+		type:String,
+		required: true
+	},
+	comName: {
+		type:Number,
+		required: true
+	},
+	candidates:[{
+		type: Schema.ObjectId
+	}]
+});
+
+committeeSchema.methods.create = function create(object, callback) {
+  console.log('committeeSchema rcvd object: \n', object);
+    if(!object.comName){
+        //callback(new Error("PostSchema.methods.create: Bad arguments"));//TODO
+	console.log("committeeSchema.methods.create: Bad arguments, name", object.comName);}
+     else if(!object.comCode)
+       console.log("committeeSchema.methods.create: Bad arguments, User Id", object.comCode);
+    else {
+        // date will be generated upon actual object creation, not client-side
+        this.comCode = object.comCode;
+	this.comName = object.comName;
+	if(object.candidates != undefined && object.candidates.length > 0)
+	{
+		this.candidates = object.candidates.slice();
+	}
+        callback(null);
+    }
+};
+
+mongoose.model('candidateInfo', candidateInfoSchema, 'candidateInfo');

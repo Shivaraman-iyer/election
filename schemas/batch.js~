@@ -1,0 +1,34 @@
+batchSchema = new Schema({
+	batchCode: {
+		type:String,
+		required: true
+	},
+	batchName: {
+		type:Number,
+		required: true
+	},
+	committees:[{
+		type: Schema.ObjectId
+	}]
+});
+
+batchSchema.methods.create = function create(object, callback) {
+  console.log('batchSchema rcvd object: \n', object);
+    if(!object.batchName){
+        //callback(new Error("PostSchema.methods.create: Bad arguments"));//TODO
+	console.log("batchSchema.methods.create: Bad arguments, name", object.batchName);}
+     else if(!object.batchCode)
+       console.log("batchSchema.methods.create: Bad arguments, User Id", object.batchCode);
+    else {
+        // date will be generated upon actual object creation, not client-side
+        this.batchCode = object.batchCode;
+	this.batchName = object.batchName;
+	if(object.committees != undefined && object.committees.length > 0)
+	{
+		this.committees = object.comittees.slice();
+	}
+        callback(null);
+    }
+};
+
+mongoose.model('batch', batchSchema, 'batch');
