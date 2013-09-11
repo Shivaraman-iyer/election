@@ -19,5 +19,3 @@ app.post('/api/vote/:id', function(req, res){
   }
 });
 });
-});
-

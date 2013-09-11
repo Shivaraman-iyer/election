@@ -55,7 +55,7 @@ app.get('/api/election/get_candidates_by_committee/:year/:batch/:committee',func
 			console.log(err.message);
 			res.send(err.message);
 		}
-		else
+		else{
 			res.send(candidates);
 		}
 	});
@@ -66,8 +66,8 @@ app.get('/api/election/get_candidates_by_committee/:year/:batch/:committee',func
 /*
 	Route to get all the years for which there is data stored
 */
-app.get('/api/election/get_all_years'function(req,res){
-	getAllYears(funtion(err,years){
+app.get('/api/election/get_all_years',function(req,res){
+	getAllYears(function(err,years){
 		if(err){
 			console.log(err.message);
 			res.send(err.message);
