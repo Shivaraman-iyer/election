@@ -1,0 +1,41 @@
+<html>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<body>
+<script>
+
+var year = {
+		start_app :"15-SEP-2013",
+		end_app:"17-SEP-2013",
+		start_with :"15-SEP-2013",
+		end_with:"17-SEP-2013",
+		start_elec :"15-SEP-2013",
+		end_elec:"17-SEP-2013",
+		res_time :"15-SEP-2013",
+		candidates : []
+};
+$.post("http://127.0.0.1:3000/api/election/initialize", year);
+var candidate = {
+		cName: "Shivaan Aiyer",
+		uId: "200901123",
+		contactNo: "81330811662",
+		batch_code: "BT2009",
+		batch_name: "BTech. 2009",
+		comm_code: "ACAD",
+		comm_name: "Academics",
+		votes : []
+};
+$.post("http://127.0.0.1:3000/api/election/apply", candidate);
+var candidate2 = {
+		cName: "Shailja Shukla",
+		uId: "200901238",
+		contactNo: "9723467408",
+		batch_code: "BT2009",
+		batch_name: "BTech. 2009",
+		comm_code: "ACAD",
+		comm_name: "Academics",
+		votes : []
+};
+$.post("http://127.0.0.1:3000/api/election/apply", candidate2);
+</script>
+</body>
+</html>

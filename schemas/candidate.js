@@ -33,7 +33,7 @@ candidateInfoSchema = new Schema({
 });
 
 candidateInfoSchema.methods.create = function create(object, callback) {
-  console.log('candidateInfoSchema rcvd object: \n', object);
+  console.log('candidateInfoSchema rcvd object: \n', object.uId);
     if(!object.cName){
         //callback(new Error("PostSchema.methods.create: Bad arguments"));//TODO
 	console.log("candidateInfoSchema.methods.create: Bad arguments, name", object.cName);}
@@ -51,14 +51,18 @@ candidateInfoSchema.methods.create = function create(object, callback) {
        console.log("candidateInfoSchema.methods.create: Bad arguments, Committee Name", object.comm_name);
     else {
         // date will be generated upon actual object creation, not client-side
-        this.name = object.cNsame;
+        this.cName = object.cName;
 	this.uId = object.uId;
 	this.contactNo = object.contactNo;
 	this.batch_code = object.batch_code;
 	this.batch_name = object.batch_name;
-	this.comm_code = object.comm_code;
-	this.comm_name = object.comm_name;
-	this.votes=object.votes;
+	this.committee_code = object.comm_code;
+	this.committee_name = object.comm_name;
+	if(object.votes != undefined && object.votes.length > 0)
+	{
+		this.votes = object.votes.slice();
+	}
+
         callback(null);
     }
 };

@@ -1,0 +1,33 @@
+app.post('/api/election/apply',function(req,res){
+	console.log('new candidate applicatoin \n',req.body);
+	addNewCandidate(req.body,function(err,candidate){
+		if(err) {
+			console.log(err.message);
+		}
+		else {
+			console.log(candidate, 'added');
+			res.send();
+		}
+	});
+});
+app.post('/api/election/initialize',function(req,res){
+        console.log('Initialize \n',req.body);
+        var yr = new Date();
+        chkYear(yr.getFullYear(),function(err,val){
+        	if(err) console.log(err.message);
+        	else{
+        		if(!val){
+        			initialize(req.body,function(err,init){
+					if(err) {
+						console.log(err.message);
+					}
+					else {
+						console.log(init, 'added');
+						res.send();
+					}
+				});
+				console.log("Year already there");
+			}
+		}
+	});
+});
