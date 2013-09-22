@@ -32,6 +32,9 @@ yearSchema = new Schema({
 		required:true	
 	},
 	candidates:[{
+		type: Schema.ObjectId
+	}],
+	candidateIds:[{
 		type: Number
 	}]
 });
@@ -73,6 +76,10 @@ yearSchema.methods.create = function create(object, callback) {
 	if(object.candidates != undefined && object.candidates.length > 0)
 	{
 		this.candidates = object.candidates.slice();
+	}
+	if(object.candidateIds != undefined && object.candidateIds.length > 0)
+	{
+		this.candidateIds = object.candidateIds.slice();
 	}
         callback(null);
     }

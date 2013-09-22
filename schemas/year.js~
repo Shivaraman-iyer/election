@@ -32,6 +32,9 @@ yearSchema = new Schema({
 		required:true	
 	},
 	candidates:[{
+		type: Schema.ObjectId
+	}],
+	candidateIds:[{
 		type: Number
 	}]
 });

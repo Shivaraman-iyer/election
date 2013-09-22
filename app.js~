@@ -47,7 +47,7 @@ require('./routes/update.js');
 
 
 if(!module.parent){
-app.listen(3007);
-console.log("Express server listening on port in %s mode",  app.settings.env);
+app.listen(3000);
+console.log("Express server listening on port %d in %s mode",process.env.Port,  app.settings.env);
 }
 

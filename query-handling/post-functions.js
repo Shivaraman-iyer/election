@@ -50,7 +50,7 @@ chkYear = function (year,callback) {
 
 addNewCandidate = function (object, callback) {
 	console.log('creating: ', object.uId); 
-		    candidate = new VSchemas.Candidate();
+		    
 		    var yr = new Date();
 		    chkYear(yr.getFullYear(),function(err,val,year){
 		    	if(err) console.log(err.message);
@@ -60,12 +60,13 @@ addNewCandidate = function (object, callback) {
 		    			console.log("lenght",year.length);
 			    		year.forEach(function(yer,index1,array1){
 						var candidates = yer.candidates;
-							chkCandidate(object.uId,yer.year,function(err,val,candid){
+							chkCandidate(object.uId,yer.year,function(err,valid){
 				    				if(err) throw err;
 				    				else{
-					    				console.log("val1",val);
-				    					if(!val){
-				    						console.log("val",val);
+					    				console.log("val1",valid);
+				    					if(!valid){
+				    						candidate = new VSchemas.Candidate();
+				    						console.log("val",valid);
 				    						candidate.create(object, function(err) { 
 											if(err) callback(err);  
 											else {
@@ -83,7 +84,7 @@ addNewCandidate = function (object, callback) {
 											callback(null, candidate.id);
 										    }
 										});
-										VSchemas.Year.update({_id:yer._id}, {$push: {'candidates':candidate.uId}}, {upsert:true}, function(err, numAffected){
+										VSchemas.Year.update({_id:yer._id}, {$push: {'candidateIds':candidate.uId,'candidates': candidate}}, {upsert:true}, function(err, numAffected){
 										if(err) console.log(err.message);
 										else
 											console.log(numAffected);
@@ -106,15 +107,15 @@ chkCandidate = function (usrId,year,callback) {
 	    	year.forEach(function(yer,index1,array1){
 	    	console.log("yer", yer);
 	    	var flag = 0;
-		var candidates = yer.candidates;
+		var candidates = yer.candidateIds;
 			console.log("before loop");
 			if(candidates.indexOf(usrId) != -1){
 				console.log("Candidate Found");
-				callback(null,true,null);
+				callback(null,true);
 			}
 			else{
 				console.log("Candidate Not Found");
-				callback(null,false,null);
+				callback(null,false);
 			}
 			/*candidates.forEach(function(candidate_id,index1,array1){
 				console.log("insidel loop");
