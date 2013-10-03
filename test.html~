@@ -2,7 +2,7 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <body>
 <script>
-
+/*
 var year = {
 		start_app :"15-SEP-2013",
 		end_app:"17-SEP-2013",
@@ -15,9 +15,9 @@ var year = {
 };
 $.post("http://127.0.0.1:3000/api/election/initialize", year);
 var candidate = {
-		cName: "Shivaraman Aiyer",
-		uId: "200901123",
-		contactNo: "8130811662",
+		cName: "Shivaan Aiyer",
+		uId: "200901223",
+		contactNo: "81330811662",
 		batch_code: "BT2009",
 		batch_name: "BTech. 2009",
 		comm_code: "ACAD",
@@ -27,7 +27,7 @@ var candidate = {
 $.post("http://127.0.0.1:3000/api/election/apply", candidate);
 var candidate2 = {
 		cName: "Shailja Shukla",
-		uId: "200901238",
+		uId: "200901138",
 		contactNo: "9723467408",
 		batch_code: "BT2009",
 		batch_name: "BTech. 2009",
@@ -35,7 +35,24 @@ var candidate2 = {
 		comm_name: "Academics",
 		votes : []
 };
-$.post("http://127.0.0.1:3000/api/election/apply", candidate2);
+$.post("http://127.0.0.1:3000/api/election/apply", candidate2);*/
+var candidate2 = {
+			committee:[
+					{
+					committee_id: "ACAD",
+					batch_code: "BT2009",
+					pref1: "5247b021793b1fee47000002",
+					pref2: "5247b03d793b1fee47000004"
+					},
+					{
+					committee_id: "ds",
+					batch_code: "BT2009",
+					pref1: "5247b021793b1fee47000002",
+					pref2: "5247b03d793b1fee47000004"
+					}
+				]
+		};
+$.post("http://127.0.0.1:3000/api/election/vote", candidate2);
 </script>
 </body>
 </html>

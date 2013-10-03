@@ -68,20 +68,18 @@ getCandidatesByBatch = function(year,batch_code,callback){
 			console.log("year fetched");
 			year.forEach(function(yer,index1,array1){
 				yer.candidates.forEach(function(candidate,index,array){
-					VSchemas.Candidate.find({"uId":candidate},function(err,candidateinfo){
-						candidateinfo.forEach(function(candidateinfor,index1,array1){
-							if(err) callback(err);
-							else{
-								if(candidateinfor.batch_code == batch_code){
-									console.log("Candidate fetched");
-									result.push(candidateinfor);
-								
-								}
-								if(index == array.length - 1)
-									callback(null,result);
+					VSchemas.Candidate.findById(candidate,function(err,candidateinfo){
+						if(err) callback(err);
+						else{
+							if(candidateinfo.batch_code == batch_code){
+								console.log("Candidate fetched");
+								result.push(candidateinfo);
 							
 							}
-						});
+							if(index == array.length - 1)
+								callback(null,result);
+						
+						}
 						
 					});
 				});
@@ -163,7 +161,7 @@ getYearInfo = function(year,callback){
 			}
 			//var candidates = year.candidates;
 			years.forEach(function(yeari,index,array){
-					if(yer.year == year){
+					if(yeari.year == year){
 						callback(null,yeari);
 				}
 			});
