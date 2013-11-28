@@ -2,6 +2,7 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <body>
 <script>
+$.post("http://127.0.0.1:3000/api/election/withdraw/52961ec263f49b533d000003","shiva");
 /*
 var year = {
 		start_app :"15-SEP-2013",
@@ -35,23 +36,59 @@ var candidate2 = {
 		comm_name: "Academics",
 		votes : []
 };
-$.post("http://127.0.0.1:3000/api/election/apply", candidate2);*/
+$.post("http://127.0.0.1:3000/api/election/apply", candidate2);
 var candidate2 = {
 			committee:[
 					{
-					committee_id: "ACAD",
-					batch_code: "BT2009",
-					pref1: "5247b021793b1fee47000002",
-					pref2: "5247b03d793b1fee47000004"
+						committee_id: "ACAD",
+						batch_code: "BT2012",
+						pref1: "52961eeb63f49b533d000005",
+						vote:{
+							pref1: "52961eeb63f49b533d000005",
+							pref2: "52961edd63f49b533d000004"
+						}
 					},
 					{
-					committee_id: "ds",
-					batch_code: "BT2009",
-					pref1: "5247b021793b1fee47000002",
-					pref2: "5247b03d793b1fee47000004"
+						committee_id: "ANNL",
+						batch_code: "BT2012",
+						pref1: "52961efd63f49b533d000006",
+						vote:{
+							pref1: "52961efd63f49b533d000006",
+							pref2: "52961f1b63f49b533d000008"
+						}
+					},
+					{
+						committee_id: "CAFE",
+						batch_code: "BT2012",
+						pref1: "52961f4563f49b533d00000a",
+						vote:{
+							pref1: "52961f4563f49b533d00000a"
+						}
+					},
+					{
+						committee_id: "CULT",
+						batch_code: "BT2012",
+						pref1: "52961fd163f49b533d000011",
+						vote:{
+							pref1: "52961fd163f49b533d000011",
+							pref2: "52961fc163f49b533d000010",
+							pref3: "52961fa863f49b533d00000e"
+						}
+/*					},
+					{
+					committee_id: "PLAC",
+					batch_code: "BT2010",
+					pref1: "52583e764a41a24b1600003c",
+					},
+					{
+					committee_id: "SPOR",
+					batch_code: "BT2010",
+					pref1: "52583eb04a41a24b16000041",
+					pref1: "52583ea74a41a24b16000040"*/
 					}
 				]
 		};
+		alert(candidate2);
 $.post("http://127.0.0.1:3000/api/election/vote", candidate2);
 </script>
 </body>

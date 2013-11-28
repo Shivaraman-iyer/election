@@ -1,24 +1,36 @@
 votePrefSchema = new Schema({
-	whoChose1 : {
-		type: Number
+	pref1 : {
+		type: Schema.ObjectId
 	},
-	whoChose2 : {
-		type: Number
+	pref2 : {
+		type: Schema.ObjectId
 	},
-	whoChose3 : {
-		type: Number
+	pref3 : {
+		type: Schema.ObjectId
 	},
-	whoChose4 : {
-		type: Number
+	pref4 : {
+		type: Schema.ObjectId
 	},
-	whoChose5 : {
-		type: Number
+	pref5 : {
+		type: Schema.ObjectId
 	}
 });
 
 votePrefSchema.methods.create = function create( callback){
+	console.log('Vote rcvd object: \n', object.uId);
+        // date will be generated upon actual object creation, not client-side
+        if(object.pref1)
+		this.pref1 = object.pref1;
+        if(object.pref2)
+		this.pref2 = object.pref2;
+ 	if(object.pref3)
+		this.pref3 = object.pref3;
+	if(object.pref4)
+		this.pref4 = object.pref4;
+	if(object.pref5)
+		this.pref5 = object.pref5;
  	callback(null);
 };
 
-mongoose.model('votePref', votePrefSchema, 'votePref');
+mongoose.model('votes', votePrefSchema, 'votes');
 

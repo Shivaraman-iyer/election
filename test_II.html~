@@ -1,0 +1,107 @@
+<html>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="./utils2.js"></script>
+<script>
+
+</script>
+<body>
+<h1>Test page for the Election software</h1>
+<div>
+<input type="radio" name="vehicle" value="year">Create Year<br>
+<input type="radio" name="vehicle" value="candidate">Create Candidate 
+</div>
+<div id="candidate" >
+	<form id= "candform">	
+		Name: <input type="text" id="name"onfocus="if (this.value == 'Enter name') this.value=''"value="Enter name"><br />
+		Id: <input type="text" id="id" ><br />
+		Contact No:<input type="text" id="no"><br />
+		Batch code: <input type="text" id="btc"><br />
+		Batch: <input type="text" id="bat" ><br />
+		Commitee Code: 	<select id="comsel">
+					<option>Choose a committee</option>
+					<option>ACAD</option>
+					<option>SPOR</option>
+					<option>HOST</option>
+					<option>ANNL</option>
+					<option>CULT</option>
+					<option>CAFE</option>
+					<option>PLAC</option>
+				</select><br />
+		Committee Name: <input type="text" id="comname" disabled><br />
+		<input type="hidden" id="votec">
+		<button type="button" id="subc">Lets Create!</button>
+
+	</form>
+</div>
+<div id="year">
+	<form id ="yrform">	
+		Start of Application: <input type="text" id="soa"><br />
+		End of application: <input type="text" id="eoa" ><br />
+		Start of Withdrawal:<input type="text" id="sow"><br />
+		End of Withdrawal: <input type="text" id="eow"><br />
+		Start of Election: <input type="text" id="soe" ><br />
+		End of Election: <input type="text" id="eoe" ><br />
+		Result Date: <input type="text" id="rest" ><br />
+		<button type="button" onclick="submitYear()">Lets Create Year!</button>
+
+	</form>
+</div>
+
+
+
+<script>
+/*
+var year = {
+		start_app :"15-SEP-2013",
+		end_app:"17-SEP-2013",
+		start_with :"15-SEP-2013",
+		end_with:"17-SEP-2013",
+		start_elec :"15-SEP-2013",
+		end_elec:"17-SEP-2013",
+		res_time :"15-SEP-2013",
+		candidates : []
+};
+$.post("http://127.0.0.1:3000/api/election/initialize", year);
+var candidate = {
+		cName: "Shivaan Aiyer",
+		uId: "200901223",
+		contactNo: "81330811662",
+		batch_code: "BT2009",
+		batch_name: "BTech. 2009",
+		comm_code: "ACAD",
+		comm_name: "Academics",
+		votes : []
+};
+$.post("http://127.0.0.1:3000/api/election/apply", candidate);
+var candidate2 = {
+		cName: "Shailja Shukla",
+		uId: "200901138",
+		contactNo: "9723467408",
+		batch_code: "BT2009",
+		batch_name: "BTech. 2009",
+		comm_code: "ACAD",
+		comm_name: "Academics",
+		votes : []
+};
+$.post("http://127.0.0.1:3000/api/election/apply", candidate2);
+var candidate2 = {
+			committee:[
+					{
+					committee_id: "ACAD",
+					batch_code: "BT2009",
+					pref1: "5247b021793b1fee47000002",
+					pref2: "5247b03d793b1fee47000004"
+					},
+					{
+					committee_id: "ACAD",
+					batch_code: "BT2009",
+					pref1: "5247b021793b1fee47000002",
+					pref2: "5247b03d793b1fee47000004"
+					}
+				]
+		};
+$.post("http://127.0.0.1:3000/api/election/vote", candidate2);*/
+</script>
+
+</body>
+</html>

@@ -26,25 +26,31 @@ candidateInfoSchema = new Schema({
 	committee_name: {
 		type:String,
 		required: true
-	},
+	},/*
 	votes:{
 		type: Number
 	},
 	countFor1 : {
 		type: Number
 	},
-	countFor2 : {
+	pref2 : [{
+		type: Schema.ObjectId
+	}],
+	pref3 : [{
+		type: Schema.ObjectId
+	}],
+	pref4 : [{
+		type: Schema.ObjectId
+	}],
+	pref5 : [{
+		type: Schema.ObjectId
+	}]*/
+	countFor1 : {
 		type: Number
 	},
-	countFor3 : {
-		type: Number
-	},
-	countFor4 : {
-		type: Number
-	},
-	countFor5 : {
-		type: Number
-	}
+	votes : [{
+		type: Schema.ObjectId
+	}]
 });
 
 candidateInfoSchema.methods.create = function create(object, callback) {
@@ -73,12 +79,14 @@ candidateInfoSchema.methods.create = function create(object, callback) {
 	this.batch_name = object.batch_name;
 	this.committee_code = object.comm_code;
 	this.committee_name = object.comm_name;
-	this.votes = object.votes;
 	this.countFor1 = 0;
-	this.countFor2 = 0;
-	this.countFor3 = 0;
-	this.countFor4 = 0;
-	this.countFor5 = 0;
+	console.log(this.countFor1, " count");
+	//this.votes = object.votes;
+	if(object.votes != undefined && object.votes.length > 0)
+	{
+		this.votes = object.votes.slice();
+	}
+	
         callback(null);
     }
 };

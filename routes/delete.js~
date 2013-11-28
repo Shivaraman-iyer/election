@@ -1,4 +1,4 @@
-app.post('/api/election/withdraw/:id',function(req,res){
+app.post('/api/elections/withdraw/:id',function(req,res){
 	console.log(req.params.id, ' withdrawing application');
 	withdrawApplication(req.params.id,function(err){
 		if(err)

@@ -5,51 +5,55 @@ function makeJSON(year,callback){
 
 getAllCandidatesByYear = function(year,callback){
 	var result = [];
-	VSchemas.Year.find({"year":year},function(err,year){
+	VSchemas.Year.findOne({"year":year},function(err,year){
 		if(err){
 			throw err
 		}
 		else {
 			console.log("year fetched");
-			year.forEach(function(yer,index1,array1){
-				console.log(yer);
 				//var candidates = yer.candidates;
-				yer.candidates.forEach(function(candidate,index,array){
-					VSchemas.Candidate.find({"uId":candidate},function(err,candidateinfo){
-						if(err) callback(err);
-						else{
-							candidateinfo = candidateinfo;
-							result.push(candidateinfo);
-							if(index == array.length - 1)
-								callback(null,result);
+				VSchemas.Candidate.find(function(err,candidates_f){
+					if(err) callback(err);
+					else
+					candidates_f.forEach(function(candidate,index,array){
+						if (year.candidateIds.indexOf(candidate.uId)>-1){
+							console.log("Candidate fetched");
+							console.log("candidate: ",index," ", candidate );
+							result.push(candidate);
+						}
+						if(index == array.length -1){
+							callback(null,result);
 						}
 					});
 				});
-			});
+//				yer.candidates.forEach(function(candidate,index,array){
+//					VSchemas.Candidate.findById(candidate,function(err,candidateinfo){
+//						if(err) callback(err);
+//						else{
+//							candidateinfo = candidateinfo;
+//							result.push(candidateinfo);
+//							if(index == array.length - 1)
+//								callback(null,result);
+//						}
+//					});
+//				});
 			
 		}
 	});
 };
 
 getCandidateByUsrId = function(year,usrId,callback){
-	VSchemas.Year.find({"year":year},function(err,year){
+	VSchemas.Year.findOne({"year":year},function(err,year){
 		if(err){
 			throw err
 		}
 		else {
 			console.log("year fetched");
-			year.forEach(function(yer,index1,array1){
-				console.log(yer);
-				//var candidates = yer.candidates;
-				yer.candidates.forEach(function(candidate,index,array){
-					VSchemas.Candidate.find({"uId":candidate},function(err,candidateinfo){
-						if(err) callback(err);
-						else{
-							if(candidateinfo.uId == usrId){
-								callback(null,candidateinfo);
-							}
-						}
-					});
+			VSchemas.Candidate.find({"uId":usrId},function(err, candidateinfo){
+				candidateinfo.forEach(function(candidate,index,array){
+					if(year.candidates.indexOf(candidate._id)>-1){
+						callback(null,candidate);
+					}
 				});
 			});
 			
@@ -57,34 +61,31 @@ getCandidateByUsrId = function(year,usrId,callback){
 	});
 };
 
-getCandidatesByBatch = function(year,batch_code,callback){
-	console.log("Fetch Candidates by Batch",batch_code);
+getCandidatesByBatch = function(year,batchcode,callback){
+	console.log("Fetch Candidates by Batch",batchcode);
 	var result = [];
-	VSchemas.Year.find({"year":year},function(err,year){
+	VSchemas.Year.findOne({"year":year},function(err,year){
 		if(err){
 			throw err
 		}
 		else {
 			console.log("year fetched");
-			year.forEach(function(yer,index1,array1){
-				yer.candidates.forEach(function(candidate,index,array){
-					VSchemas.Candidate.findById(candidate,function(err,candidateinfo){
-						if(err) callback(err);
-						else{
-							if(candidateinfo.batch_code == batch_code){
+				VSchemas.Candidate.find({"batch_code":batchcode},function(err,bat_cand){
+					if(bat_cand.length != 0)
+						bat_cand.forEach(function(candidateinfo,index_bat,array_bat){
+							if(year.candidateIds.indexOf(candidateinfo.uId) > -1){
 								console.log("Candidate fetched");
+								console.log("res: ",index_bat," ", candidateinfo );
 								result.push(candidateinfo);
-							
 							}
-							if(index == array.length - 1)
+							if(index_bat == array_bat.length - 1){
+								console.log("result" + result);
 								callback(null,result);
-						
-						}
-						
-					});
+							}
+						});
+					else
+						callback(null,result);
 				});
-			});
-			
 		}
 	});
 } 
@@ -93,30 +94,19 @@ getCandidatesByBatch = function(year,batch_code,callback){
 getCandidatesByCommittee  = function(year,batch_code,comm_code,callback){
 	console.log("Fetch Candidates by committee",comm_code);
 	var result = [];
-	VSchemas.Year.find({"year":year},function(err,year){
+	VSchemas.Year.findOne({"year":year},function(err,year){
 		if(err){
 			throw err
 		}
 		else {
 			console.log("year fetched");
-			year.forEach(function(yer,index1,array1){
-				yer.candidates.forEach(function(candidate,index,array){
-					VSchemas.Candidate.find({"uId":candidate},function(err,candidateinfo){
-						candidateinfo.forEach(function(candidateinfor,index1,array1){
-							if(err) callback(err);
-							else{
-								if(candidateinfor.batch_code == batch_code && candidateinfor.committee_code == comm_code){
-									console.log("Candidate fetched");
-									result.push(candidateinfor);
-								
-								}
-								if(index == array.length - 1)
-									callback(null,result);
-							
-							}
-						});
-						
-					});
+			VSchemas.Candidate.find({"batch_code":batch_code,"committee_code":comm_code},function(err, candidates){
+				candidates.forEach(function(candidate,index,array){
+					if(year.candidates.indexOf(candidate._id) > -1){
+						result.push(candidate);
+					}
+					if(index == array.length - 1)
+						callback(null,result);
 				});
 			});
 			
